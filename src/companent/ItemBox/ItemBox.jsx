@@ -1,17 +1,22 @@
 import React from "react";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import BasketButton from "../Buttons/BasketButton";
 import BuyButton from "../Buttons/BuyButton";
+import { useDispatch } from "react-redux";
+import { addWishlist } from "../../store/reducer/getSlice";
 
 const ItemBox = ({ item }) => {
+  const dispatch = useDispatch()
+  const handleWishlist = (id) => {   //add and remove wishlist product
+    dispatch(addWishlist(id))
+  }
   return (
     <div style={styles.boxStyle}>
       <div style={styles.boxNavbar}>
         <div style={styles.boxImage}>
           <img src="k.png" alt="" />
         </div>
-        <div style={styles.boxIcon}>
-          <MdFavoriteBorder />
+        <div style={styles.boxIcon} onClick={() => handleWishlist(item.id)} >{item.wishlist ? <MdFavorite/> : <MdFavoriteBorder/>}
         </div>
       </div>
       <div style={styles.boxContent}>

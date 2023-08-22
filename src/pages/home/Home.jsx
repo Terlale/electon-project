@@ -2,8 +2,9 @@ import Navbar from "../../companent/Navbar/Navbar";
 import ItemBox from "../../companent/ItemBox/ItemBox";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesThunk } from "../../store/reducer/getSlice";
+import { getCategoriesThunk, addWishlist } from "../../store/reducer/getSlice";
 import Footer from "../../companent/Footer/Footer";
+
 
 const Home = () => {
   const data = useSelector((state) => state.get.categories);
@@ -12,6 +13,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getCategoriesThunk());
   }, []);
+
+  
 
   return (
     <div>

@@ -12,7 +12,14 @@ export const getCategoriesThunk = createAsyncThunk(
 const getSlice = createSlice({
   name: "get",
   initialState: {},
-  reducers: {},
+  reducers: {
+    addWishlist :(state, action) => {
+      let categories = state.categories.find((p) => p.id == action.payload)
+      if (categories != undefined) {
+        categories.wishlist = !categories.wishlist;
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCategoriesThunk.fulfilled, (state, action) => {
@@ -26,7 +33,10 @@ const getSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
+
+
   },
 });
+export const { addWishlist } = getSlice.actions;
 
 export default getSlice.reducer;
