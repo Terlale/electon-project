@@ -11,14 +11,32 @@ export const getCategoriesThunk = createAsyncThunk(
 
 const getSlice = createSlice({
   name: "get",
-  initialState: {},
+  initialState: {
+    categories: [],
+    loading: false,
+    error: null,
+    basketItems: [],
+  },
+  
+
   reducers: {
     addWishlist :(state, action) => {
       let categories = state.categories.find((p) => p.id == action.payload)
       if (categories != undefined) {
         categories.wishlist = !categories.wishlist;
       }
+    },
+    addToBasket: (state, action) => {
+      const item = state.categories.find(category => category.id === action.payload);
+      if (item) {
+        const isItemInBasket = state.basketItems.some(basketItem => basketItem.id === item.id);
+        if (!isItemInBasket) {
+          state.basketItems.push(item);
+        }
+      }
     }
+    
+    
   },
   extraReducers: (builder) => {
     builder
@@ -37,6 +55,6 @@ const getSlice = createSlice({
 
   },
 });
-export const { addWishlist } = getSlice.actions;
+export const { addWishlist ,addToBasket} = getSlice.actions;
 
 export default getSlice.reducer;

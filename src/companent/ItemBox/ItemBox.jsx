@@ -3,13 +3,17 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import BasketButton from "../Buttons/BasketButton";
 import BuyButton from "../Buttons/BuyButton";
 import { useDispatch } from "react-redux";
-import { addWishlist } from "../../store/reducer/getSlice";
+import { addToBasket, addWishlist } from "../../store/reducer/getSlice";
 
 const ItemBox = ({ item }) => {
   const dispatch = useDispatch()
-  const handleWishlist = (id) => {   //add and remove wishlist product
+  const handleWishlist = (id) => { 
     dispatch(addWishlist(id))
   }
+  const handleAddToBasket = (id) => {
+    dispatch(addToBasket(id));
+    alert("Elave olundu")
+  };
   return (
     <div style={styles.boxStyle}>
       <div style={styles.boxNavbar}>
@@ -23,9 +27,9 @@ const ItemBox = ({ item }) => {
         <p style={styles.itemName}>{item.name}</p>
         <p style={styles.itemPrice}>185 TL</p>
         <div style={styles.itemButtons}>
-          <BasketButton />
-          <BuyButton />
-        </div>
+        <BasketButton onClick={() => handleAddToBasket(item.id)} />
+        <BuyButton />
+      </div>
       </div>
     </div>
   );
