@@ -6,30 +6,37 @@ import { useDispatch } from "react-redux";
 import { addToBasket, addWishlist } from "../../store/reducer/getSlice";
 
 const ItemBox = ({ item }) => {
-  const dispatch = useDispatch()
-  const handleWishlist = (id) => { 
-    dispatch(addWishlist(id))
-  }
+  const dispatch = useDispatch();
+
+  const handleWishlist = (id) => {
+    dispatch(addWishlist(id));
+  };
+
   const handleAddToBasket = (id) => {
     dispatch(addToBasket(id));
-    alert("Elave olundu")
+    alert("Elave olundu");
   };
+
   return (
     <div style={styles.boxStyle}>
       <div style={styles.boxNavbar}>
         <div style={styles.boxImage}>
-          <img src="k.png" alt="" />
+          <img style={styles.image} src={item.image} alt="#" />
         </div>
-        <div style={styles.boxIcon} onClick={() => handleWishlist(item.id)} >{item.wishlist ? <MdFavorite/> : <MdFavoriteBorder/>}
+        <div
+          style={styles.boxIcon}
+          onClick={() => handleWishlist(item.id)}
+        >
+          {item.wishlist ? <MdFavorite /> : <MdFavoriteBorder />}
         </div>
       </div>
       <div style={styles.boxContent}>
-        <p style={styles.itemName}>{item.name}</p>
-        <p style={styles.itemPrice}>185 TL</p>
+        <p style={styles.itemName}>{item.title}</p>
+        <p style={styles.itemPrice}>{item.price} TL</p>
         <div style={styles.itemButtons}>
-        <BasketButton onClick={() => handleAddToBasket(item.id)} />
-        <BuyButton />
-      </div>
+          <BasketButton onClick={() => handleAddToBasket(item.id)} />
+          <BuyButton />
+        </div>
       </div>
     </div>
   );
@@ -40,45 +47,51 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    border: "1px solid rgba(182, 182, 182, 1)",
     padding: "20px",
-    borderRadius:"20px",
+    borderRadius: "20px",
     boxSizing: "border-box",
+    boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "white",
+    gap:"20px",
   },
   boxNavbar: {
     display: "flex",
-    justifyContent: "space-between",
     width: "100%",
+    alignItems: "flex-start",
   },
   boxIcon: {
-    width: "28px",
-    height: "28px",
+    padding:"5px",
     borderRadius: "50%",
     backgroundColor: "rgba(179, 212, 229, 1)",
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  },
+  image: {
+    width: "50%",
+    height: "auto",
+    borderRadius: "10px",
   },
   boxImage: {
-    width: "85%",
-    height: "154px",
-    borderRadius: "50%",
-    backgroundColor: "rgb(249, 249, 249)",
+    display: "flex",
+    justifyContent: "center",
   },
-
   itemName: {
     marginBottom: "5px",
-    color:"rgba(0, 63, 98, 1)",
-    padding: "0px 5px",
-
+    color: "rgba(0, 63, 98, 1)",
+    fontSize: "1rem",
   },
   itemPrice: {
     marginBottom: "5px",
     fontWeight: "bold",
-    padding: "0px 5px",
+    fontSize: "1rem",
   },
-  itemButtons:{
+  itemButtons: {
     display: "flex",
     justifyContent: "space-between",
-  }
+  },
 };
 
 export default ItemBox;

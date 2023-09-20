@@ -1,12 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ItemBox from "../../companent/ItemBox/ItemBox";
 import Logo from "./images/logo.svg";
 import Search from "../../companent/Search/Search";
 import { GrFormNextLink } from "react-icons/gr";
+import { getFavoriteThunk } from "../../store/reducer/getFavorite";
 
 const Favorite = () => {
-  const wishlist = useSelector((state) => state.get.wishlist);
+  const wishlist = useSelector((state) => state.getFavorite.favorite);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getFavoriteThunk())
+  }, [])
+  
 
   return (
     <div>
@@ -22,8 +29,15 @@ const Favorite = () => {
         <h5 style={styles.header}>Favorite item's</h5>
       </div>
       <div>
-        {wishlist &&
-          wishlist.map((item) => <ItemBox key={item.id} item={item} />)}
+      {wishlist ? (
+          wishlist.map((item, index) => (
+            <div key={item.id} style={styles.itemBoxContainerStyle}>
+              <ItemBox item={item} />
+            </div>
+          ))
+        ) : (
+          <p>No favorite items found.</p>
+        )}
       </div>
     </div>
   );
@@ -50,5 +64,6 @@ const styles = {
     color: "#003f62",
   },
 };
+
 
 export default Favorite;

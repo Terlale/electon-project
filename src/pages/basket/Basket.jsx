@@ -1,10 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Search from '../../companent/Search/Search';
 import Logo from "./images/logo 1.png";
+import { getBasketThunk } from '../../store/reducer/getBasket';
+import ItemBox from '../../companent/ItemBox/ItemBox';
 
 const Basket = () => {
-  const basketItems = useSelector(state => state.get.basketItems);
+  const basketItems = useSelector(state => state.getBasket.basket);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getBasketThunk())
+  }, [])
+  
+
 
   return (
     <div>
@@ -19,11 +28,14 @@ const Basket = () => {
       <div style={styles.navbar}>
         <h5 style={styles.header}>Basket item's</h5>
       </div>
-      <ul>
-        {basketItems.map(item => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      <div>
+      {basketItems &&
+          basketItems.map((item, index) => (
+            <div key={item.id} style={styles.itemBoxContainerStyle}>
+              <ItemBox item={item} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
@@ -48,6 +60,9 @@ const styles = {
   },
   header: {
     color: "#003f62",
+  },
+  itemBoxContainerStyle : {
+    width: "100%",
   },
 }
 

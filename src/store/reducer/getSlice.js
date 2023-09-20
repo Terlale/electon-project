@@ -4,7 +4,7 @@ import axios from "axios";
 export const getCategoriesThunk = createAsyncThunk(
   "./categories/api",
   async () => {
-    const response = await axios.get("https://northwind.vercel.app/api/categories");
+    const response = await axios.get("http://localhost:3000/api/products");
     return response.data;
   }
 );
