@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import { TfiLocationPin } from "react-icons/tfi";
 import { FiTruck } from "react-icons/fi";
 import { BsPerson } from "react-icons/bs";
 import { MdFavoriteBorder } from "react-icons/md";
 import { SlBasket } from "react-icons/sl";
-import { AiOutlineDown } from "react-icons/ai";
 import Logo from "./images/Logo.svg";
 import { useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
@@ -24,7 +22,7 @@ const NavbarComponent = () => {
   };
 
   const goFavorite = () => {
-    navigate("./favorite");
+    navigate("./favourites");
   };
 
   // Diğer kodlar burada

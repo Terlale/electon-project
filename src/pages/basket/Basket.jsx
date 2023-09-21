@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Search from '../../companent/Search/Search';
 import Logo from "./images/logo 1.png";
 import { getBasketThunk } from '../../store/reducer/getBasket';
-import ItemBox from '../../companent/ItemBox/ItemBox';
+import BasketBox from '../../companent/BasketBox/BasketBox';
 
 const Basket = () => {
   const basketItems = useSelector(state => state.getBasket.basket);
@@ -32,7 +32,7 @@ const Basket = () => {
       {basketItems &&
           basketItems.map((item, index) => (
             <div key={item.id} style={styles.itemBoxContainerStyle}>
-              <ItemBox item={item} />
+              <BasketBox item={item} />
             </div>
           ))}
       </div>

@@ -4,25 +4,18 @@ import BasketButton from "../Buttons/BasketButton";
 import BuyButton from "../Buttons/BuyButton";
 import { useDispatch } from "react-redux";
 import { addToBasket, addWishlist } from "../../store/reducer/getSlice";
-import axios from "axios";
 
-const ItemBox = ({ item }) => {
+const BasketBox = ({ item }) => {
   const dispatch = useDispatch();
 
-  const addToBasket = (item) => {
-    axios.post(`http://localhost:3000/api/basket`, item)
-    
-  }
+  const handleWishlist = (id) => {
+    dispatch(addWishlist(id));
+  };
 
-
-  // const handleWishlist = (id) => {
-  //   dispatch(addWishlist(id));
-  // };
-
-  // const handleAddToBasket = (id) => {
-  //   dispatch(addToBasket());
-  //   alert("Elave olundu");
-  // };
+  const handleAddToBasket = (id) => {
+    dispatch(addToBasket(id));
+    alert("Elave olundu");
+  };
 
   return (
     <div style={styles.boxStyle}>
@@ -32,7 +25,7 @@ const ItemBox = ({ item }) => {
         </div>
         <div
           style={styles.boxIcon}
-          
+          onClick={() => handleWishlist(item.id)}
         >
           {item.wishlist ? <MdFavorite /> : <MdFavoriteBorder />}
         </div>
@@ -41,7 +34,7 @@ const ItemBox = ({ item }) => {
         <p style={styles.itemName}>{item.title}</p>
         <p style={styles.itemPrice}>{item.price} TL</p>
         <div style={styles.itemButtons}>
-          <BasketButton onClick= {addToBasket}/>
+          <BasketButton onClick={() => handleAddToBasket(item.id)} />
           <BuyButton />
         </div>
       </div>
@@ -101,4 +94,4 @@ const styles = {
   },
 };
 
-export default ItemBox;
+export default BasketBox;

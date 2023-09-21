@@ -1,8 +1,8 @@
 import React from "react";
 import {SlBasket} from 'react-icons/sl'
 
-const BasketButton = () => {
-  return <button style={styles.buttonText}>
+const BasketButton = ({onClick}) => {
+  return <button style={styles.buttonText} onClick={onClick}>
    <div style={styles.addText}>Add basket</div>
    <div style={styles.buttonIcon}><SlBasket/></div>
   </button>;
