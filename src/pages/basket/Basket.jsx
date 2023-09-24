@@ -4,6 +4,7 @@ import Search from '../../companent/Search/Search';
 import Logo from "./images/logo 1.png";
 import { getBasketThunk } from '../../store/reducer/getBasket';
 import BasketBox from '../../companent/BasketBox/BasketBox';
+import axios from 'axios';
 
 const Basket = () => {
   const basketItems = useSelector(state => state.getBasket.basket);
@@ -13,6 +14,15 @@ const Basket = () => {
     dispatch(getBasketThunk())
   }, [])
   
+  const handleAddToBasket = (itemId) => {
+    const isItemInBasket = basketItems.some((item) => item.id === itemId);
+    return isItemInBasket;
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3000/api/basket/${id}`);
+  };
+
 
 
   return (
@@ -28,11 +38,11 @@ const Basket = () => {
       <div style={styles.navbar}>
         <h5 style={styles.header}>Basket item's</h5>
       </div>
-      <div>
+      <div style={styles.basketAll}>
       {basketItems &&
           basketItems.map((item, index) => (
             <div key={item.id} style={styles.itemBoxContainerStyle}>
-              <BasketBox item={item} />
+              <BasketBox item={item} addToBasket={handleAddToBasket} isDisabled={handleAddToBasket(item.id)} onClick={() => handleDelete(item.id)}/>
             </div>
           ))}
       </div>
@@ -41,6 +51,12 @@ const Basket = () => {
 };
 
 const styles = {
+  basketAll:{
+    display:"flex",
+    flexDirection: "column",
+    gap:"20px",
+    padding:"30px",
+  },
   logoSearch: {
     display: "flex",
     justifyContent: "space-between",

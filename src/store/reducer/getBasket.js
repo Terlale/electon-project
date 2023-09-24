@@ -20,24 +20,11 @@ const getBasket = createSlice({
   
 
   reducers: {
-    // addWishlist :(state, action) => {
-    //   let categories = state.categories.find((p) => p.id == action.payload)
-    //   if (categories != undefined) {
-    //     categories.wishlist = !categories.wishlist;
-    //   }
-    // },
-    // addToBasket: (state, action) => {
-    //   const item = state.categories.find(category => category.id === action.payload);
-    //   if (item) {
-    //     const isItemInBasket = state.basketItems.some(basketItem => basketItem.id === item.id);
-    //     if (!isItemInBasket) {
-    //       state.basketItems.push(item);
-    //     }
-    //   }
-    // }
-    
-    
+    addDelete: (state, action) => {
+      state.basketItems = state.basketItems.filter(item => item.id !== action.payload);
+    }
   },
+  
   extraReducers: (builder) => {
     builder
       .addCase(getBasketThunk.fulfilled, (state, action) => {
@@ -55,6 +42,6 @@ const getBasket = createSlice({
 
   },
 });
-// export const { addWishlist ,addToBasket} = getBasket.actions;
+export const { addDelete} = getBasket.actions;
 
 export default getBasket.reducer;

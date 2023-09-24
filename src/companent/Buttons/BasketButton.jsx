@@ -1,11 +1,23 @@
 import React from "react";
 import {SlBasket} from 'react-icons/sl'
 
-const BasketButton = ({onClick}) => {
-  return <button style={styles.buttonText} onClick={onClick}>
-   <div style={styles.addText}>Add basket</div>
-   <div style={styles.buttonIcon}><SlBasket/></div>
-  </button>;
+const BasketButton = ({ onClick, isDisabled }) => {
+  return (
+    <button
+      style={{
+        ...styles.buttonText,
+        backgroundColor: isDisabled ? "gray" : styles.buttonText.backgroundColor,
+        cursor: isDisabled ? "not-allowed" : "pointer",
+      }}
+      onClick={onClick}
+      disabled={isDisabled}
+    >
+      <div style={styles.addText}>Add basket</div>
+      <div style={styles.buttonIcon}>
+        <SlBasket />
+      </div>
+    </button>
+  );
 };
 const styles = {
   buttonText: {

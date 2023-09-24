@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import BasketButton from "../Buttons/BasketButton";
 import BuyButton from "../Buttons/BuyButton";
 import axios from "axios";
-import FavoriteButton from "../Buttons/FavoriteButton";
+import {GrFormClose} from 'react-icons/gr'
 
-const ItemBox = ({ item }) => {
-  const [wishlist, setWishlist] = useState(item.wishlist);
+const FavoriteBox = ({ item, onClick }) => {
+    
+ 
 
   const addToBasket = (item) => {
     axios
@@ -18,18 +19,18 @@ const ItemBox = ({ item }) => {
       });
   };
 
-  const toggleWishlist = () => {
-    setWishlist(!wishlist);
-  };
+
+
+
 
   return (
     <div style={styles.boxStyle}>
       <div style={styles.boxNavbar}>
-      <div style={styles.boxImage}>
-        <img style={styles.image} src={item.image} alt="#" />
+        <div style={styles.boxImage}>
+          <img style={styles.image} src={item.image} alt="#" />
+        </div>
+        <div style={styles.boxIcon} onClick={onClick}><GrFormClose /></div>
       </div>
-      <FavoriteButton wishlist={wishlist} item={item} setWishlist={setWishlist} />
-    </div>
       <div style={styles.boxContent}>
         <p style={styles.itemName}>{item.title}</p>
         <p style={styles.itemPrice}>{item.price} TL</p>
@@ -82,6 +83,16 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
   },
+ boxIcon:{
+    padding: "5px",
+    borderRadius: "50%",
+    backgroundColor: "rgba(179, 212, 229, 1)",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+ }
 };
 
-export default ItemBox;
+export default FavoriteBox;

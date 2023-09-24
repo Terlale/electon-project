@@ -20,21 +20,13 @@ const getFavorite = createSlice({
   
 
   reducers: {
-    // addWishlist :(state, action) => {
-    //   let categories = state.categories.find((p) => p.id == action.payload)
-    //   if (categories != undefined) {
-    //     categories.wishlist = !categories.wishlist;
-    //   }
-    // },
-    // addToBasket: (state, action) => {
-    //   const item = state.categories.find(category => category.id === action.payload);
-    //   if (item) {
-    //     const isItemInBasket = state.basketItems.some(basketItem => basketItem.id === item.id);
-    //     if (!isItemInBasket) {
-    //       state.basketItems.push(item);
-    //     }
-    //   }
-    // }
+    addWishlist :(state, action) => {
+      let categories = state.categories.find((p) => p.id == action.payload)
+      if (categories != undefined) {
+        categories.wishlist = !categories.wishlist;
+      }
+    },
+   
     
     
   },
@@ -55,6 +47,6 @@ const getFavorite = createSlice({
 
   },
 });
-// export const { addWishlist ,addToBasket} = getFavorite.actions;
+export const { addWishlist} = getFavorite.actions;
 
 export default getFavorite.reducer;

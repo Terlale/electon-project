@@ -3,10 +3,10 @@ import { FiTruck } from "react-icons/fi";
 import { BsPerson } from "react-icons/bs";
 import { MdFavoriteBorder } from "react-icons/md";
 import { SlBasket } from "react-icons/sl";
-import Logo from "./images/Logo.svg";
+import Logo from "./images/logo 1.png";
 import { useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
-import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap stil dosyasını ekleyin
+import "bootstrap/dist/css/bootstrap.min.css"; 
 import BootstrapNavbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -25,7 +25,7 @@ const NavbarComponent = () => {
     navigate("./favourites");
   };
 
-  // Diğer kodlar burada
+  
 
   return (
     <div>

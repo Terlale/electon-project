@@ -1,42 +1,50 @@
-import React from "react";
-import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import BasketButton from "../Buttons/BasketButton";
-import BuyButton from "../Buttons/BuyButton";
-import { useDispatch } from "react-redux";
-import { addToBasket, addWishlist } from "../../store/reducer/getSlice";
+import axios from "axios";
+import React, { useState } from "react";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
-const BasketBox = ({ item }) => {
-  const dispatch = useDispatch();
+const BasketBox = ({ item, onClick }) => {
+  const [quantity, setQuantity] = useState(1);
 
-  const handleWishlist = (id) => {
-    dispatch(addWishlist(id));
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
 
-  const handleAddToBasket = (id) => {
-    dispatch(addToBasket(id));
-    alert("Elave olundu");
+  const increaseQuantity = () => {
+    if (quantity < 10) {
+      setQuantity(quantity + 1);
+    }
   };
+
+ 
 
   return (
     <div style={styles.boxStyle}>
       <div style={styles.boxNavbar}>
-        <div style={styles.boxImage}>
-          <img style={styles.image} src={item.image} alt="#" />
-        </div>
-        <div
-          style={styles.boxIcon}
-          onClick={() => handleWishlist(item.id)}
-        >
-          {item.wishlist ? <MdFavorite /> : <MdFavoriteBorder />}
+        <img style={styles.image} src={item.image} alt="#" />
+        <div>
+          <p style={styles.itemName}>{item.title}</p>
+          <p style={{ fontSize: "12px" }}>
+            <span style={{ color: "green" }}>Fast delivery:</span> in cargo in
+            2 days
+          </p>
         </div>
       </div>
-      <div style={styles.boxContent}>
-        <p style={styles.itemName}>{item.title}</p>
+      <div style={styles.boxButtons}>
+        <button onClick={decreaseQuantity} style={styles.buttons}>
+          -
+        </button>
+        <button style={styles.buttonQuantity}>{quantity}</button>
+        <button onClick={increaseQuantity} style={styles.buttons}>
+          +
+        </button>
+      </div>
+      <div>
         <p style={styles.itemPrice}>{item.price} TL</p>
-        <div style={styles.itemButtons}>
-          <BasketButton onClick={() => handleAddToBasket(item.id)} />
-          <BuyButton />
-        </div>
+      </div>
+      <div>
+        <RiDeleteBin5Fill style={styles.deleteIcon} onClick={onClick}/>
       </div>
     </div>
   );
@@ -45,38 +53,25 @@ const BasketBox = ({ item }) => {
 const styles = {
   boxStyle: {
     display: "flex",
-    flexDirection: "column",
     justifyContent: "space-between",
+    alignItems: "center",
     padding: "20px",
     borderRadius: "20px",
     boxSizing: "border-box",
     boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.2)",
     backgroundColor: "white",
-    gap:"20px",
+  },
+  boxButtons: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  image: {
+    width: "15%",
   },
   boxNavbar: {
     display: "flex",
-    width: "100%",
-    alignItems: "flex-start",
-  },
-  boxIcon: {
-    padding:"5px",
-    borderRadius: "50%",
-    backgroundColor: "rgba(179, 212, 229, 1)",
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer",
-  },
-  image: {
-    width: "50%",
-    height: "auto",
-    borderRadius: "10px",
-  },
-  boxImage: {
-    display: "flex",
-    justifyContent: "center",
   },
   itemName: {
     marginBottom: "5px",
@@ -87,11 +82,25 @@ const styles = {
     marginBottom: "5px",
     fontWeight: "bold",
     fontSize: "1rem",
+    color: "rgba(0, 63, 98, 1)",
   },
-  itemButtons: {
-    display: "flex",
-    justifyContent: "space-between",
+  deleteIcon: {
+    fontSize: "24px",
+    cursor: "pointer",
+    color: "#eda415",
   },
+  buttonQuantity: {
+    border: "1px solid #E6E6E6",
+    padding: "3px 20px",
+    backgroundColor: "white",
+  },
+  buttons: {
+    border: "1px solid #E6E6E6",
+    color: "#eda415",
+    backgroundColor: "#FBFBFB",
+  },
+  
 };
+
 
 export default BasketBox;
