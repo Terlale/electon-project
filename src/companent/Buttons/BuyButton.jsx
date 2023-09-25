@@ -8,7 +8,7 @@ const BuyButton = () => {
 const styles = {
   buttonText: {
     width: "80px",
-    height: "50px",
+    height: "40px",
     padding:"10px",
     border: "none",
     backgroundColor: "rgba(135, 188, 217, 1)",
@@ -20,7 +20,7 @@ const styles = {
     
   },
   buyText:{
-    fontSize:"15px"
+    fontSize:"12px"
   }
 
 };

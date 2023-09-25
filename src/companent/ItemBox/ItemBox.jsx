@@ -75,7 +75,7 @@ const styles = {
   },
   itemPrice: {
     marginBottom: "5px",
-    fontWeight: "bold",
+    fontWeight: "400",
     fontSize: "1rem",
   },
   itemButtons: {

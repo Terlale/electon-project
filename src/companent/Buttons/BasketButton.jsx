@@ -22,7 +22,7 @@ const BasketButton = ({ onClick, isDisabled }) => {
 const styles = {
   buttonText: {
     width: "140px",
-    height: "50px",
+    height: "40px",
     padding:"10px",
     border: "none",
     backgroundColor: "rgba(135, 188, 217, 1)",
@@ -30,7 +30,8 @@ const styles = {
     borderRadius: "12px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    gap:5
     
   },
   buttonIcon :{
@@ -42,7 +43,7 @@ const styles = {
     color:" white",
   },
   addText:{
-    fontSize:"15px"
+    fontSize:"12px"
   },
 };
 
